@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--Software License Agreement (BSD)-->
+
+<launch>
+
+  <arg name="scan_topic" default="/scan" />
+  <arg name="map_topic" default="map" />
+
+  <node ns="/outdoor_waypoint_nav" pkg="depthimage_to_laserscan" type="DepthImageToLaserScanNodelet" name="realsense-mapping" output="log" />
+
+</launch>

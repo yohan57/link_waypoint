@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>link_navigation</name>
+  <version></version>
+  <description>
+
+  </description>
+
+  <maintainer email=""></maintainer>
+
+  <license></license>
+
+  <url type="website"></url>
+  <url type="repository"></url>
+  <url type="bugtracker"></url>
+
+  <author></author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <run_depend>gmapping</run_depend>
+  <run_depend>map_server</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>stage_ros</run_depend>
+
+</package>

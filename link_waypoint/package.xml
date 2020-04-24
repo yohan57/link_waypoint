@@ -1,0 +1,27 @@
+<package>
+  <name>link_waypoint</name>
+  <version>0.2.3</version>
+  <description>
+    waypoint for LINK
+  </description>
+  <maintainer email=""></maintainer>
+  <license></license>
+
+  <url type="website"></url>
+  <url type="repository"></url>
+  <url type="bugtracker"></url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>laser_scan_publisher</run_depend>
+  <run_depend>navigation_stage</run_depend>
+  <run_depend>odometry_publisher</run_depend>
+  <run_depend>point_cloud_publisher</run_depend>
+  <run_depend>robot_setup_tf</run_depend>
+  <run_depend>roomba_stage</run_depend>
+  <run_depend>simple_navigation_goals</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

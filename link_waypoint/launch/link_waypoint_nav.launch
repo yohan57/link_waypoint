@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+
+   <master auto="start"/>
+
+ <!-- Launch realsense -->
+    
+ <!-- Launch e2box IMU -->
+   
+    <node pkg="e2box_imu"type="e2box_imu_node"name="e2box_imu_node"output="screen" />
+
+ <!-- Launch GPS -->
+    <include file="$(find link_waypoint)/link_waypoint/launch/include/gps.launch" />
+ <!-- laser scan -->
+
+    <include file="$(find link_waypoint)/link_waypoint/launch/include/realsense2laser.launch" /> 
+
+ <!---Launch Localization(ekf, navsat tf) -->
+    <include file="$(find link_waypoint)/link_waypoint/launch/include/localization.launch" /> 
+
+
+ <!-- Launch move_base -->  
+    <include file="$(find link_waypoint)/link_waypoint/launch/move_base_nav.launch" />
+
+ <!-- Launch rosserial -->
+
+    <node name="serial_node_link" pkg="rosserial_python" type="serial_node.py" output="screen">
+        <param name="port" value="/dev/ttyACM0" />
+        <param name="baud" value="57600" />
+    </node>
+
+</launch> 
