@@ -8,7 +8,7 @@
     
  <!-- Launch e2box IMU -->
    
-    <node pkg="e2box_imu"type="e2box_imu_node"name="e2box_imu_node"output="screen" />
+    <include file="$(find link_waypoint)/launch/include/imu.launch"output="screen" />
 
  <!-- Launch GPS -->
     <include file="$(find link_waypoint)/link_waypoint/launch/include/gps.launch" />
