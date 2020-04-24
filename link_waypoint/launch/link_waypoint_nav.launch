@@ -18,7 +18,9 @@
 
  <!---Launch Localization(ekf, navsat tf) -->
     <include file="$(find link_waypoint)/link_waypoint/launch/include/localization.launch" /> 
-
+ 
+ <!-- Run gmapping to create map -->
+    <include file="$(find husky_navigation)/launch/gmapping.launch" />
 
  <!-- Launch move_base -->  
     <include file="$(find link_navigation)/link_waypoint/launch/move_base_nav.launch" />
