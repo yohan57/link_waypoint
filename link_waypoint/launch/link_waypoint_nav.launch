@@ -8,7 +8,7 @@
     <include file="$(find link_waypoint)/link_waypoint/launch/include/realsense2laser.launch" />
  
  <!-- Launch e2box IMU -->   
-    <include file="$(find link_waypoint)/launch/include/imu.launch"output="screen" />
+    <include file="$(find link_waypoint)/launch/include/imu.launch" output="screen" />
 
  <!-- Launch GPS -->
     <include file="$(find link_waypoint)/link_waypoint/launch/include/gps.launch" />
