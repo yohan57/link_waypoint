@@ -8,7 +8,7 @@
     </node>	
     
     <node pkg="nmea_navsat_driver" type="nmea_topic_driver" name="nmea_topic_driver">
-        <remap from="/gps/fix" to="fix" />
+        <remap from="/gps/fix" to="/navsat/fix" />
     </node>
 
     <node pkg="gps_common" type="utm_odometry_node" name="utm_odometry_node"/>
