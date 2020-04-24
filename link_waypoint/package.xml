@@ -1,5 +1,20 @@
 <package>
   <name>link_waypoint</name>
+<<<<<<< HEAD
+  <version>0.0.1</version>
+  <description>
+    waypoint for LINK
+  </description>
+  <maintainer email="_@neubility.co.kr">neubility</maintainer>
+
+  <license>BSD</license>  
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>link_navigation</run_depend>
+  <run_depend>robot_setup_tf</run_depend>
+  <run_depend>slam_gmapping</run_depend>
+=======
   <version>0.2.3</version>
   <description>
     waypoint for LINK
@@ -20,6 +35,7 @@
   <run_depend>robot_setup_tf</run_depend>
   <run_depend>roomba_stage</run_depend>
   <run_depend>simple_navigation_goals</run_depend>
+>>>>>>> 5ee7db8591f21ac05426d8e3daabca1147f24895
 
   <export>
     <metapackage/>
