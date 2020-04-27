@@ -1,0 +1,5 @@
+<?xml version="1.0"?> 
+<!-- Launch heading calibration -->
+ <!-- After launching heading calibration, restart link_waypoint_nav.launch-->
+
+    <include file="$(find link_waypoint_nav)/launch/include/heading_calibration.launch" />

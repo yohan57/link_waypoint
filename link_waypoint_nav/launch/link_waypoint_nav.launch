@@ -4,14 +4,19 @@
 
    <master auto="start"/>
 
- <!-- Launch realsense -->
-    <include file="$(find link_waypoint_nav)/launch/include/realsense2laser.launch" />
- 
+ <!-- Launch rosserial -->
+
+    <node name="serial_node_link" pkg="rosserial_python" type="serial_node.py">
+        <param name="port" value="/dev/ttyACM0" />
+        <param name="baud" value="57600" />
+    </node>
+
  <!-- Launch e2box IMU -->   
-    <include file="$(find link_waypoint_nav)/launch/include/imu.launch" output="screen" />
+    <include file="$(find link_waypoint_nav)/launch/include/imu.launch"/>
 
  <!-- Launch GPS -->
     <include file="$(find link_waypoint_nav)/launch/include/gps.launch" />
+
  <!-- laser scan -->
 
     <include file="$(find link_waypoint_nav)/launch/include/realsense2laser.launch" /> 
@@ -21,24 +26,11 @@
  
  <!-- Run gmapping to create map -->
     <include file="$(find link_navigation)/launch/gmapping.launch" />
-
- <!-- Launch heading calibration -->
-
- <!--
-    <include file="$(find link_waypoint_nav)/launch/include/heading_calibration.launch" />
- -->
-  
+ 
  <!-- Launch move_base -->  
     <include file="$(find link_navigation)/launch/move_base_nav.launch" />
 
  <!-- Launch send_goal -->
     <include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" />
- 
- <!-- Launch rosserial -->
-
-    <node name="serial_node_link" pkg="rosserial_python" type="serial_node.py" output="screen">
-        <param name="port" value="/dev/ttyACM0" />
-        <param name="baud" value="57600" />
-    </node>
 
 </launch> 
