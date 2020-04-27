@@ -29,7 +29,7 @@ std::string path_local, path_abs;
 
 int countWaypointsInFile(std::string path_local)
 {
-    path_abs = ros::package::getPath("outdoor_waypoint_nav") + path_local;
+    path_abs = ros::package::getPath("link_waypoint_nav") + path_local;
     std::ifstream fileCount(path_abs.c_str());
     if(fileCount.is_open())
     {
@@ -56,7 +56,7 @@ std::vector <std::pair<double, double>> getWaypoints(std::string path_local)
 {
     double lati = 0, longi = 0;
 
-    path_abs = ros::package::getPath("outdoor_waypoint_nav") + path_local;
+    path_abs = ros::package::getPath("link_waypoint_nav") + path_local;
     std::ifstream fileRead(path_abs.c_str());
     for(int i = 0; i < numWaypoints; i++)
     {
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
     //Setting true is telling the constructor to start ros::spin()
 
     // Initiate publisher to send end of node message and collect scan request
-    ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("outdoor_waypoint_nav/waypoint_following_status", 100);
+    ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("link_waypoint_nav/waypoint_following_status", 100);
     ros::Publisher pubScanRequest = n.advertise<std_msgs::Bool>("/m3d_test/aggregator/request", 1000);
 
     //wait for the action server to come up
@@ -193,7 +193,7 @@ int main(int argc, char** argv)
     //Get Longitude and Latitude goals from text file
 
     //Count number of waypoints
-    ros::param::get("/outdoor_waypoint_nav/coordinates_file", path_local);
+    ros::param::get("/link_waypoint_nav/coordinates_file", path_local);
     numWaypoints = countWaypointsInFile(path_local);
 
     //Reading waypoints from text file and output results
@@ -246,7 +246,7 @@ int main(int argc, char** argv)
 
         if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
         {
-            ROS_INFO("Husky has reached its goal!");
+            ROS_INFO("Link has reached its goal!");
             ROS_INFO("Collecting Scan...");
             std_msgs::Bool take_scan;
             take_scan.data = true;
@@ -256,7 +256,7 @@ int main(int argc, char** argv)
         }
         else
         {
-            ROS_ERROR("Husky was unable to reach its goal. GPS Waypoint unreachable.");
+            ROS_ERROR("Link was unable to reach its goal. GPS Waypoint unreachable.");
             ROS_INFO("Exiting node...");
             // Notify joy_launch_control that waypoint following is complete
             std_msgs::Bool node_ended;
@@ -266,7 +266,7 @@ int main(int argc, char** argv)
         }
     } // End for loop iterating through waypoint vector
 
-    ROS_INFO("Husky has reached all of its goals!!!\n");
+    ROS_INFO("Link has reached all of its goals!!!\n");
     ROS_INFO("Ending node...");
 
     // Notify joy_launch_control that waypoint following is complete
