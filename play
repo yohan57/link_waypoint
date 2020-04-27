@@ -1,0 +1,39 @@
+/chatter X
+/cmd_vel X
+/depth_to_laser/parameter_descriptions O
+/depth_to_laser/parameter_updates O
+/diagnostics O 
+/gps/navsat/fix O but nan
+/gps/nmea_sentence O 
+/gps/nmea_sentence_out x
+/gps/time_reference x
+/gps/vel x
+/imu/data x
+/imu/data_raw O but only zero
+/imu_e2box O but only zero
+/imu_filter/parameter_descriptions O 
+/imu_filter/parameter_updates O
+/imu_in/mag x not appear to be published yet
+/imu_manager/bond O 
+/joy_teleop/cmd_vel X
+/link_waypoint_nav/gps/filtered X
+/link_waypoint_nav/map X
+/link_waypoint_nav/map_metadata X
+/link_waypoint_nav/odometry/filtered X
+/link_waypoint_nav/odometry/filtered_map X
+/link_waypoint_nav/odometry/gps X
+/link_waypoint_nav/set_pose X
+/link_waypoint_nav/slam_gmapping/entropy X 
+/move_base/current_goal X
+/move_base/goal X
+/move_base_simple/goal X
+/navsat/fix X
+/usonic_data_0 X
+/usonic_data_1 X
+/scan O
+/scan_unfiltered O
+/tf
+/tf_static
+/rosout
+/rosout_agg
+
