@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 
     // Initialise publishers and subscribers
     ros::Subscriber sub_odom = n.subscribe("/link_waypoint_nav/odometry/filtered_map", 100, filtered_odom_CB);
-    ros::Publisher pubVel = n.advertise<geometry_msgs::Twist>("/husky_velocity_controller/cmd_vel",100);
+    ros::Publisher pubVel = n.advertise<geometry_msgs::Twist>("/joy_teleop/cmd_vel",100);
     ros::Publisher pubCalibrationNodeEnded = n.advertise<std_msgs::Bool>("/link_waypoint_nav/calibrate_status",100);
 
     // Get parameters from parameer server
