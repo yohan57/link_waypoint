@@ -4,7 +4,7 @@
 /depth_to_laser/parameter_updates O
 /diagnostics O 
 /gps/navsat/fix O but nan
-/gps/nmea_sentence O 
+/gps/nmea_sentence O
 /gps/nmea_sentence_out x
 /gps/time_reference x
 /gps/vel x
