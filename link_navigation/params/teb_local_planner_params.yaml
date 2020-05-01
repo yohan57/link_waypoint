@@ -7,9 +7,9 @@ TebLocalPlannerROS:
   teb_autosize: True
   dt_ref: 0.3
   dt_hysteresis: 0.1
-  min_samples: 5
+  min_samples: 10
   global_plan_overwrite_orientation: True
-  max_global_plan_lookahead_dist: 2.0
+  max_global_plan_lookahead_dist: 1.5
   feasibility_check_no_poses: 5
   
   # Robot  
@@ -25,7 +25,7 @@ TebLocalPlannerROS:
   acc_lim_x: 1.0
   acc_lim_y: 0.0
 
-  min_turning_radius: 0.7
+  min_turning_radius: 0.3
   footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
    type: "point"
    radius: 0.2 # for type "circular"
@@ -43,13 +43,10 @@ TebLocalPlannerROS:
 
   # Obstacles
     
-  min_obstacle_dist: 0.4
-  include_costmap_obstacles: false
-  costmap_obstacles_behind_robot_dist: 0.5
-  obstacle_poses_affected: 30
-  costmap_converter_plugin: ""
-  costmap_converter_spin_thread: True
-  costmap_converter_rate: 5
+  min_obstacle_dist: 0.5
+  include_costmap_obstacles: True
+  costmap_obstacles_behind_robot_dist: 0.4
+  obstacle_poses_affected: 20
   
   # Optimization
     
@@ -58,12 +55,12 @@ TebLocalPlannerROS:
   optimization_activate: True
   optimization_verbose: False
   penalty_epsilon: 0.1
-  weight_max_vel_x: 2
+  weight_max_vel_x: 3
   weight_max_vel_theta: 1
   weight_acc_lim_x: 1
   weight_acc_lim_theta: 1
   weight_kinematics_nh: 1000
-  weight_kinematics_forward_drive: 2
+  weight_kinematics_forward_drive: 3
   weight_kinematics_turning_radius: 1
   weight_optimaltime: 1
   weight_obstacle: 50

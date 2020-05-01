@@ -141,7 +141,7 @@ int ustop(int us_0, int us_1){
     driveCallback(zeroTwist);
   }
   else {
-    defaultDrive();
+    //defaultDrive();
     //driveCallback();
     
   }

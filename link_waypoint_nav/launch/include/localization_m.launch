@@ -15,7 +15,7 @@
         <remap from="imu/data" to="/imu/data"/>
     </node>
 
-     <node pkg="tf" type="static_transform_publisher" name="navsat_trans_broadcaster" args="0 0 0 0 0 0 base_link utm 10"/>
+    <!--node pkg="tf" type="static_transform_publisher" name="navsat_trans_broadcaster" args="0 0 0 0 0 0 base_link utm 10"/-->
   </group>
 
 </launch>

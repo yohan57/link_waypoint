@@ -14,12 +14,7 @@
  <!-- Launch e2box IMU -->   
     <include file="$(find link_waypoint_nav)/launch/include/imu.launch"/>
 
- <!-- Launch GPS -->
-    <include file="$(find link_waypoint_nav)/launch/include/gps.launch" />
-
  <!---Launch Localization(ekf, navsat tf) -->
-
-    <include file="$(find link_waypoint_nav)/launch/include/localization.launch" />
 
     <include file="$(find link_waypoint_nav)/launch/include/heading_calibration.launch" />
 </launch>
