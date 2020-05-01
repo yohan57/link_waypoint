@@ -5,7 +5,7 @@
  <!-- After launching heading calibration, restart link_waypoint_nav.launch-->
    
  <!-- Launch rosserial -->
-
+<launch>
     <node name="serial_node_link" pkg="rosserial_python" type="serial_node.py">
         <param name="port" value="/dev/ttyACM0" />
         <param name="baud" value="57600" />
@@ -22,5 +22,5 @@
     <include file="$(find link_waypoint_nav)/launch/include/localization.launch" />
 
     <include file="$(find link_waypoint_nav)/launch/include/heading_calibration.launch" />
-
+</launch>
 

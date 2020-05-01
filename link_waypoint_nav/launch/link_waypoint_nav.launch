@@ -3,6 +3,7 @@
 <launch>
 
    <master auto="start"/>
+   <param name="/use_sim_time" value="false"/>
 
  <!-- Launch rosserial -->
 
@@ -22,15 +23,15 @@
     <include file="$(find link_waypoint_nav)/launch/include/realsense2laser.launch" /> 
 
  <!---Launch Localization(ekf, navsat tf) -->
-    <include file="$(find link_waypoint_nav)/launch/include/localization.launch" /> 
- 
+    
+    <include file="$(find link_waypoint_nav)/launch/include/localization_m.launch" /> 
+
  <!-- Run gmapping to create map -->
-    <include file="$(find link_navigation)/launch/gmapping.launch" />
+    <!--include file="$(find link_navigation)/launch/gmapping.launch" /-->
  
  <!-- Launch move_base -->  
-    <include file="$(find link_navigation)/launch/move_base_nav.launch" />
+    <include file="$(find link_navigation)/launch/move_base_nav_m.launch" />
 
  <!-- Launch send_goal -->
-    <include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" />
-
+    <!--include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" /-->
 </launch> 

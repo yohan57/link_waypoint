@@ -14,6 +14,20 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
   base_link_frame: base_link
   world_frame: odom
 
+#GPS odometry:
+
+#  odom0: /link_waypoint_nav/odometry/gps
+#  odom0_config: [true,  true,  false,
+#                 false, false, false,
+#                 false, false, false,
+#                 false, false, false,
+#                 false, false, false]
+#  odom0_queue_size: 10
+#  odom0_nodelay: true
+#  odom0_differential: false
+#  odom0_relative: false
+
+
 # -------------------------------------
 # Wheel odometry:
 
@@ -31,16 +45,16 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
 # -------------------------------------
 # Laser scanmatching odometry:
 
-#  odom1: scanmatch_odom
-#  odom1_config: [false, false, false,
+#  odom0: scanmatch_odom
+#  odom0_config: [false, false, false,
 #                 false, false, false,
 #                 true,  true,  true,
 #                 false, false, true,
 #                 false, false, false]
-#  odom1_queue_size: 10
-#  odom1_nodelay: true
-#  odom1_differential: false
-#  odom1_relative: false
+#  odom0_queue_size: 10
+#  odom0_nodelay: true
+#  odom0_differential: false
+#  odom0_relative: false
 
 # --------------------------------------
 # imu configure:
@@ -53,7 +67,7 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
                 true,  true,  true]
   imu0_nodelay: false
   imu0_differential: false
-  imu0_relative: false
+  imu0_relative: true
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true
 
@@ -93,7 +107,7 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
 
 ekf_se_map:
   frequency: 30
-  sensor_timeout: 0.1
+  sensor_timeout: 0.2
   two_d_mode: true
   transform_time_offset: 0.0
   transform_timeout: 0.0
@@ -122,30 +136,30 @@ ekf_se_map:
 # -------------------------------------
 # GPS odometry:
 
-  odom1: /link_waypoint_nav/odometry/gps
-  odom1_config: [true,  true,  false,
+  odom0: /link_waypoint_nav/odometry/gps
+  odom0_config: [true,  true,  false,
                  false, false, false,
                  false, false, false,
                  false, false, false,
                  false, false, false]
-  odom1_queue_size: 10
-  odom1_nodelay: true
-  odom1_differential: false
-  odom1_relative: false
+  odom0_queue_size: 5
+  odom0_nodelay: true
+  odom0_differential: false
+  odom0_relative: true
 
 # -------------------------------------
 # Laser scanmatching odometry:
 
-#  odom2: scanmatch_odom
-#  odom2_config: [false, false, false,
+#  odom1: scanmatch_odom
+#  odom1_config: [false, false, false,
 #                 false, false, false,
 #                 true,  true,  true,
 #                 false, false, true,
 #                 false, false, false]
-#  odom2_queue_size: 10
-#  odom2_nodelay: true
-#  odom2_differential: false
-#  odom2_relative: false
+#  odom1_queue_size: 10
+#  odom1_nodelay: true
+#  odom1_differential: false
+#  odom1_relative: false
 
 # --------------------------------------
 # imu configure:
@@ -156,7 +170,7 @@ ekf_se_map:
                 false, false, false,
                 true,  true,  true,
                 true,  true,  true]
-  imu0_nodelay: true
+  imu0_nodelay: false
   imu0_differential: false
   imu0_relative: false
   imu0_queue_size: 10
