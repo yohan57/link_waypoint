@@ -183,7 +183,7 @@ void driveCallback ( const geometry_msgs::Twist&  twistMsg)
   }
 
   if(!usonic_stop){
-    escCommand = 120 * (twistMsg.linear.x);
+    escCommand = 100 * (twistMsg.linear.x);
   }
   
   

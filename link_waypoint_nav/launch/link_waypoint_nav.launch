@@ -27,7 +27,7 @@
     <include file="$(find link_waypoint_nav)/launch/include/localization_m.launch" /> 
 
  <!-- Run gmapping to create map -->
-    <!--include file="$(find link_navigation)/launch/gmapping.launch" /-->
+    <include file="$(find link_navigation)/launch/gmapping.launch" />
  
  <!-- Launch move_base -->  
     <include file="$(find link_navigation)/launch/move_base_nav_m.launch" />
