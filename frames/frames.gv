@@ -1,0 +1,13 @@
+digraph G {
+"map" -> "utm"[label="Broadcaster: /link_waypoint_nav/navsat_transform\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1588589644.067 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_link" -> "camera_depth_frame"[label="Broadcaster: /camera/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1588589644.067 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "camera_link"[label="Broadcaster: /realsense_broadcaster\nAverage rate: 98.125 Hz\nMost recent transform: 1588589644.069 ( -0.002 sec old)\nBuffer length: 4.892 sec\n"];
+"camera_depth_frame" -> "camera_depth_optical_frame"[label="Broadcaster: /camera/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1588589644.067 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /imu_manager\nAverage rate: 100.203 Hz\nMost recent transform: 1588589644.058 ( 0.009 sec old)\nBuffer length: 4.940 sec\n"];
+"map" -> "odom"[label="Broadcaster: /link_waypoint_nav/ekf_se_map\nAverage rate: 30.210 Hz\nMost recent transform: 1588589644.038 ( 0.029 sec old)\nBuffer length: 4.899 sec\n"];
+"base_link" -> "imu_link"[label="Broadcaster: /imu_broadcaster\nAverage rate: 10.193 Hz\nMost recent transform: 1588589644.069 ( -0.002 sec old)\nBuffer length: 4.807 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1588589644.067"[ shape=plaintext ] ;
+ }->"map";
+}
