@@ -7,19 +7,28 @@ TebLocalPlannerROS:
   teb_autosize: True
   dt_ref: 0.3
   dt_hysteresis: 0.1
+<<<<<<< HEAD
   min_samples: 3
+=======
+  min_samples: 5
+>>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
   global_plan_overwrite_orientation: True
   max_global_plan_lookahead_dist: 2.0
   feasibility_check_no_poses: 5
   
   # Robot  
 
+<<<<<<< HEAD
   max_vel_x: 0.5
   min_vel_x: 0.3
 
 
 
  # Allowing velocities too low will will stop the obstacle avoidance because low velocities won't actually be high enough to move the robot
+=======
+  max_vel_x: 0.6
+  min_vel_x: 0.4 # Allowing velocities too low will will stop the obstacle avoidance because low velocities won't actually be high enough to move the robot
+>>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
 
   max_vel_theta: 1.0
   min_vel_theta: -1.0
@@ -29,7 +38,11 @@ TebLocalPlannerROS:
   acc_lim_x: 1.0
   acc_lim_y: 0.0
 
+<<<<<<< HEAD
   min_turning_radius: 1.0
+=======
+  min_turning_radius: 0.7
+>>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
   footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
    type: "vertices"
    radius: 0.2 # for type "circular"
@@ -41,13 +54,17 @@ TebLocalPlannerROS:
    rear_radius: 0.2 # for type "two_circles"
    vertices: [ [0.25, -0.05], [0.18, -0.05], [0.18, -0.18], [-0.19, -0.18], [-0.25, 0], [-0.19, 0.18], [0.18, 0.18], [0.18, 0.05], [0.25, 0.05] ] # for type "polygon"
   # Goal Tolerance Parameters
+<<<<<<< HEAD
   yaw_goal_tolerance: 0.5  # in rads
+=======
+  yaw_goal_tolerance: 0.1  # in rads
+>>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
   xy_goal_tolerance: 0.2  # in meters
   free_goal_vel: True
 
   # Obstacles
     
-  min_obstacle_dist: 0.5
+  min_obstacle_dist: 0.3
   include_costmap_obstacles: True
   costmap_obstacles_behind_robot_dist: 0.2
   obstacle_poses_affected: 20

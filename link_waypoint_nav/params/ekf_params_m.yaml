@@ -23,9 +23,15 @@ ekf_se_map: # Used only for broadcasting odom to base_link transforms
                  false, false, false,
                  false, false, false]
   odom0_queue_size: 5
+<<<<<<< HEAD
   odom0_nodelay: false
   odom0_differential: false
   odom0_relative: false
+=======
+  odom0_nodelay: true
+  odom0_differential: false
+  odom0_relative: true
+>>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
 
 
 # -------------------------------------
