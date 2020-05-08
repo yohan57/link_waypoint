@@ -1,16 +1,11 @@
 global_costmap:
   global_frame: odom
   robot_base_frame: base_link
-<<<<<<< HEAD
+
   update_frequency: 5
   publish_frequency: 2
   width: 5.0
   height: 5.0
-=======
-  update_frequency: 10
-  publish_frequency: 5
-  width: 20.0
-  height: 20.0
->>>>>>> 74f4f2bb67022e54d07cc63998e062aabed38be4
+
   static_map: false
   rolling_window: true
