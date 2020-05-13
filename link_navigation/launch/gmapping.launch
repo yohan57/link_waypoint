@@ -77,7 +77,7 @@
     <remap from="map" to="$(arg map_topic)"/>
 
   </node>
-  <!--node pkg="tf" type="static_transform_publisher" name="gmapping_broadcaster" args="0 0 0 0 0 0 base_link camera_depth_frame 30"/-->
+  <!--node pkg="tf" type="static_transform_publisher" name="gmapping_broadcaster" args="0 0 0 0 0 0 0 base_link camera_link"/-->
 
 
 </launch>
