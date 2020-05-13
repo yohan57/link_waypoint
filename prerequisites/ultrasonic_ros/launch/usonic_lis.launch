@@ -1,6 +1,0 @@
-<launch>
-
-        <!-- -->
-        <node pkg="ultrasonic_ros" name="listener" type="listener_ros.py" />
-
-</launch>
