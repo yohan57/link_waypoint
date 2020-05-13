@@ -3,6 +3,7 @@ navsat_transform:
   delay: 0
   magnetic_declination_radians: 0.00000
   yaw_offset: 0.00000
+
   zero_altitude: true
   broadcast_utm_transform: true
   publish_filtered_gps: true
