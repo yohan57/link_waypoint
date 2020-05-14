@@ -21,7 +21,7 @@
     <!--remap from="/move_base_simple/goal" to="/move_base/goal" /-->
 
   </node>
-  <node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster" args="0 0 0 0 0 3.14 base_link camera_link 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster" args="0 0 0.4 1.57 0 0 odom camera_link 10"/>
   <!--node pkg="tf" type="static_transform_publisher" name="odom2baselink_broadcaster" args="0 0 0 0 0 0 0 base_link camera_link" /-->
 </launch>
 
