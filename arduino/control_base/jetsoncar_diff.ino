@@ -54,17 +54,17 @@ const int PWMB_f = 5;
 const int DIRB_b = 13;
 const int PWMB_b = 11;
 
-Servo steeringServo;
-
 int usonic_stop = 0;
 int usonic_0 = 1;
 int usonic_1 = 1;
 
 geometry_msgs::Twist zeroTwist;
 
+//pwm constant initiate
 const int MIN_PWM = 50;
 const int MAX_PWM = 100;
 
+//chatter initiate
 std_msgs::String str_msg;
 ros::Publisher chatter("chatter", &str_msg);
 
@@ -86,33 +86,8 @@ float Pmap(float x, float out_min, float out_max)
   return x * (out_max - out_min) + out_min;
 }
 
-void driveCallback(const geometry_msgs::Twist &twistMsg)
-{
-  // Cap values at [-1 .. 1]
-  float x = max(min(twistMsg.linear.x, 1.0f), -1.0f);
-  float z = max(min(twistMsg.angular.z, 1.0f), -1.0f);
+void chatter_log(float l, float r){
 
-  // Calculate the intensity of left and right wheels. Simple version.
-  
-  float l = (twistMsg.linear.x - twistMsg.angular.z) / 2;
-  float r = (twistMsg.linear.x + twistMsg.angular.z) / 2;
-
-  // Then map those values to PWM intensities. PWMRANGE = full speed, while PWM_MIN = the minimal amount of power at which the motors begin moving.
-  uint16_t lPwm = Pmap(fabs(l), MIN_PWM, MAX_PWM);
-  uint16_t rPwm = Pmap(fabs(r), MIN_PWM, MAX_PWM);
-
-  // Set direction pins and PWM
-
-  digitalWrite(DIRA_f, l < 0);
-  digitalWrite(DIRA_b, l < 0);
-  digitalWrite(DIRB_f, r > 0);
-  digitalWrite(DIRB_b, r > 0);
-  analogWrite(PWMA_f, lPwm);
-  analogWrite(PWMA_b, lPwm);
-  analogWrite(PWMB_f, rPwm);
-  analogWrite(PWMB_b, rPwm);
-
-  //chatter debugging code
   if (l > 0 && r >0 && l==r){
     str_msg.data = "Straight forward";
     chatter.publish(&str_msg);
@@ -137,6 +112,37 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
     str_msg.data = "Backward";
     chatter.publish(&str_msg);
   }
+  
+}
+
+void driveCallback(const geometry_msgs::Twist &twistMsg)
+{
+  // Cap values at [-1 .. 1]
+  float x = max(min(twistMsg.linear.x, 1.0f), -1.0f);
+  float z = max(min(twistMsg.angular.z, 1.0f), -1.0f);
+
+  // Calculate the intensity of left and right wheels. Simple version.
+  
+  float l = (twistMsg.linear.x - twistMsg.angular.z) / 2;
+  float r = (twistMsg.linear.x + twistMsg.angular.z) / 2;
+
+  // Then map those values to PWM intensities. MAX_PWM = full speed, while MIN_PWM = the minimal amount of power at which the motors begin moving.
+  uint16_t lPwm = Pmap(fabs(l), MIN_PWM, MAX_PWM);
+  uint16_t rPwm = Pmap(fabs(r), MIN_PWM, MAX_PWM);
+
+  // Set direction pins and PWM
+
+  digitalWrite(DIRA_f, l < 0);
+  digitalWrite(DIRA_b, l < 0);
+  digitalWrite(DIRB_f, r > 0);
+  digitalWrite(DIRB_b, r > 0);
+  analogWrite(PWMA_f, lPwm);
+  analogWrite(PWMA_b, lPwm);
+  analogWrite(PWMB_f, rPwm);
+  analogWrite(PWMB_b, rPwm);
+
+  //chatter debugging code
+  chatter_log(l,r);
        
 }
 
@@ -217,19 +223,10 @@ void setup() {
   nh.advertise(chatter);
   // Subscribe to the steering and throttle messages
 
-
   nh.subscribe(driveSubscriber);
   nh.subscribe(usonicSubscriber_0);
   nh.subscribe(usonicSubscriber_1);
 
-  // Attach the servos to actual pins
-  steeringServo.attach(9); // Steering servo is attached to pin 9
-
-  
-  // Initialize Steering and ESC setting
-  // Steering centered is 90, throttle at neutral is 90
-  // default dc motor is 0
-  steeringServo.write(90) ;
   defaultDrive();
   delay(100) ;
 
