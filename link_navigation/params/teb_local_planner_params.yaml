@@ -45,13 +45,9 @@ TebLocalPlannerROS:
    rear_radius: 0.2 # for type "two_circles"
    vertices: [ [0.25, -0.05], [0.18, -0.05], [0.18, -0.18], [-0.19, -0.18], [-0.25, 0], [-0.19, 0.18], [0.18, 0.18], [0.18, 0.05], [0.25, 0.05] ] # for type "polygon"
   # Goal Tolerance Parameters
-<<<<<<< HEAD
-  yaw_goal_tolerance: 0.5  # in rads
-=======
 
   yaw_goal_tolerance: 0.5  # in rads
 
->>>>>>> b66a9e87b88a75ead99d62ed061d9f3b97fdd14b
   xy_goal_tolerance: 0.2  # in meters
   free_goal_vel: True
 
