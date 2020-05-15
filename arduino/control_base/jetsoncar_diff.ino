@@ -26,7 +26,6 @@
 #include <std_msgs/UInt16.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Int32.h>
-#include <std_msgs/Empty.h>
 #include <geometry_msgs/Twist.h>
 
 ros::NodeHandle  nh;
@@ -61,12 +60,8 @@ int usonic_1 = 1;
 geometry_msgs::Twist zeroTwist;
 
 //pwm constant initiate
-const int MIN_PWM = 50;
-const int MAX_PWM = 100;
-
-//chatter initiate
-std_msgs::String str_msg;
-ros::Publisher chatter("chatter", &str_msg);
+const int MIN_PWM = 30;
+const int MAX_PWM = 50;
 
 int ustop(int us_0, int us_1){
   int us_stop = (us_0 || us_1);
@@ -86,33 +81,10 @@ float Pmap(float x, float out_min, float out_max)
   return x * (out_max - out_min) + out_min;
 }
 
-void chatter_log(float l, float r){
-
-  if (l > 0 && r >0 && l==r){
-    str_msg.data = "Straight forward";
-    chatter.publish(&str_msg);
-  }
-  else if (l > 0 && r >0 && l>r){
-    str_msg.data = "Right forward";
-    chatter.publish(&str_msg);
-  }
-  else if (l > 0 && r >0 && l<r){
-    str_msg.data = "Left forward";
-    chatter.publish(&str_msg);
-  }
-  else if (l > 0 && r < 0){
-    str_msg.data = "Right inplace rotation";
-    chatter.publish(&str_msg);
-  }
-  else if (l < 0 && r > 0){
-    str_msg.data = "Left inplace rotation";
-    chatter.publish(&str_msg);
-  }
-  else if (l < 0 && r < 0){
-    str_msg.data = "Backward";
-    chatter.publish(&str_msg);
-  }
-  
+void pwm_log(int l, int r){
+  char str[30];
+  sprintf(str, "PWM: %d %d", l, r);
+  nh.loginfo(str);
 }
 
 void driveCallback(const geometry_msgs::Twist &twistMsg)
@@ -131,18 +103,23 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
   uint16_t rPwm = Pmap(fabs(r), MIN_PWM, MAX_PWM);
 
   // Set direction pins and PWM
+  if (l==0 && r==0){
+    defaultDrive();
+    }
+  else {
+    digitalWrite(DIRA_f, l < 0);
+    digitalWrite(DIRA_b, l < 0);
+    digitalWrite(DIRB_f, r > 0);
+    digitalWrite(DIRB_b, r > 0);
+    analogWrite(PWMA_f, lPwm);
+    analogWrite(PWMA_b, lPwm);
+    analogWrite(PWMB_f, rPwm);
+    analogWrite(PWMB_b, rPwm);
+    }
+  
 
-  digitalWrite(DIRA_f, l < 0);
-  digitalWrite(DIRA_b, l < 0);
-  digitalWrite(DIRB_f, r > 0);
-  digitalWrite(DIRB_b, r > 0);
-  analogWrite(PWMA_f, lPwm);
-  analogWrite(PWMA_b, lPwm);
-  analogWrite(PWMB_f, rPwm);
-  analogWrite(PWMB_b, rPwm);
-
-  //chatter debugging code
-  chatter_log(l,r);
+  //pwm debugging code
+  pwm_log(int(lPwm), int(rPwm));
        
 }
 
@@ -219,8 +196,6 @@ void setup() {
   pinMode(13, OUTPUT);
   Serial.begin(57600) ;
   nh.initNode();
-  // This can be useful for debugging purposes
-  nh.advertise(chatter);
   // Subscribe to the steering and throttle messages
 
   nh.subscribe(driveSubscriber);
