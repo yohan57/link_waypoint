@@ -29,12 +29,6 @@
 #include <geometry_msgs/Twist.h>
 
 ros::NodeHandle  nh;
-// These are general bounds for the steering servo and the
-// TRAXXAS Electronic Speed Controller (ESC)
-const int minSteering = 75 ;
-const int maxSteering = 105;
-const int minThrottle = 0 ;
-const int maxThrottle = 150 ;
 
 //pin for DC motor
 //DIR = Direction
@@ -45,11 +39,11 @@ const int maxThrottle = 150 ;
 const int DIRA_f = 4;
 const int PWMA_f = 3;
 const int DIRA_b = 7;
-const int PWMA_b = 6;
+const int PWMA_b = 10;
 
 
 const int DIRB_f = 2;
-const int PWMB_f = 5;
+const int PWMB_f = 9;
 const int DIRB_b = 13;
 const int PWMB_b = 11;
 
@@ -60,8 +54,8 @@ int usonic_1 = 1;
 geometry_msgs::Twist zeroTwist;
 
 //pwm constant initiate
-const int MIN_PWM = 30;
-const int MAX_PWM = 50;
+const int MIN_PWM = 20;
+const int MAX_PWM = 100;
 
 int ustop(int us_0, int us_1){
   int us_stop = (us_0 || us_1);
