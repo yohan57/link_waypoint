@@ -12,6 +12,10 @@
         <param name="baud" value="57600" />
     </node>
 
+ <!-- Launch wheel encoder -->   
+    <include file="$(find link_waypoint_nav)/launch/include/wheel_encoder.launch"/>
+
+
  <!-- Launch e2box IMU -->   
     <include file="$(find link_waypoint_nav)/launch/include/imu.launch"/>
 

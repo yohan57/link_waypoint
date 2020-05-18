@@ -54,7 +54,7 @@ int usonic_1 = 1;
 geometry_msgs::Twist zeroTwist;
 
 //pwm constant initiate
-const int MIN_PWM = 20;
+const int MIN_PWM = 30;
 const int MAX_PWM = 100;
 
 int ustop(int us_0, int us_1){
@@ -75,10 +75,17 @@ float Pmap(float x, float out_min, float out_max)
   return x * (out_max - out_min) + out_min;
 }
 
-void pwm_log(int l, int r){
-  char str[30];
-  sprintf(str, "PWM: %d %d", l, r);
-  nh.loginfo(str);
+void pwm_log(int l, int r, float fl, float fr, float x, float z){
+  char str1[50], str2[50];
+  char tmp1[20], tmp2[20], tmp3[20], tmp4[20];
+  dtostrf(fl, 8, 3, tmp1);
+  dtostrf(fr, 8, 3, tmp2);
+  dtostrf(x, 8, 3, tmp3);
+  dtostrf(z, 8, 3, tmp4);
+  sprintf(str1, "PWM: %d %d    lr: %s %s\n", l, r, tmp1, tmp2);
+  sprintf(str2, "twist(x, z): %s %s\n", tmp3, tmp4);
+  nh.loginfo(str1);
+  nh.loginfo(str2);
 }
 
 void driveCallback(const geometry_msgs::Twist &twistMsg)
@@ -88,32 +95,46 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
   float z = max(min(twistMsg.angular.z, 1.0f), -1.0f);
 
   // Calculate the intensity of left and right wheels. Simple version.
-  
+  /*
   float l = (twistMsg.linear.x - twistMsg.angular.z) / 2;
   float r = (twistMsg.linear.x + twistMsg.angular.z) / 2;
-
+  */
+  float l = (x - z) / 2;
+  float r = (x + z) / 2;
+  
   // Then map those values to PWM intensities. MAX_PWM = full speed, while MIN_PWM = the minimal amount of power at which the motors begin moving.
   uint16_t lPwm = Pmap(fabs(l), MIN_PWM, MAX_PWM);
   uint16_t rPwm = Pmap(fabs(r), MIN_PWM, MAX_PWM);
 
   // Set direction pins and PWM
+  
   if (l==0 && r==0){
     defaultDrive();
+  }
+  else if ((l<0 || r<0) && x<0){
+    digitalWrite(DIRA_f, l<0);
+    digitalWrite(DIRA_b, l<0);
+    digitalWrite(DIRB_f, r>0);
+    digitalWrite(DIRB_b, r>0);
+    analogWrite(PWMA_f, rPwm);
+    analogWrite(PWMA_b, rPwm);
+    analogWrite(PWMB_f, lPwm);
+    analogWrite(PWMB_b, lPwm); 
     }
-  else {
-    digitalWrite(DIRA_f, l < 0);
-    digitalWrite(DIRA_b, l < 0);
-    digitalWrite(DIRB_f, r > 0);
-    digitalWrite(DIRB_b, r > 0);
+  else{
+    digitalWrite(DIRA_f, l<0);
+    digitalWrite(DIRA_b, l<0);
+    digitalWrite(DIRB_f, r>0);
+    digitalWrite(DIRB_b, r>0);
     analogWrite(PWMA_f, lPwm);
     analogWrite(PWMA_b, lPwm);
     analogWrite(PWMB_f, rPwm);
-    analogWrite(PWMB_b, rPwm);
-    }
+    analogWrite(PWMB_b, rPwm); 
+    } 
+    
   
-
   //pwm debugging code
-  pwm_log(int(lPwm), int(rPwm));
+  pwm_log(int(lPwm), int(rPwm), l, r, x, z);
        
 }
 
