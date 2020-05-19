@@ -21,5 +21,5 @@ cost_scaling_factor: 10 # slope of the cost decay curve with respect to distance
 
 observation_sources: laser_scan_sensor
 
-laser_scan_sensor: {sensor_frame: camera_depth_frame, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+laser_scan_sensor: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
 

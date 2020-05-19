@@ -12,21 +12,7 @@ ekf_se_map: # Used only for broadcasting odom to base_link transforms
   map_frame: map
   odom_frame: odom
   base_link_frame: base_link
-  world_frame: map
-
-#GPS odometry:
-
-  odom0: /link_waypoint_nav/odometry/gps
-  odom0_config: [true,  true,  false,
-                 false, false, false,
-                 false, false, false,
-                 false, false, false,
-                 false, false, false]
-  odom0_queue_size: 5
-  odom0_nodelay: false
-  odom0_differential: false
-  odom0_relative: false
-
+  world_frame: odom
 
 # -------------------------------------
 # Wheel odometry:
@@ -41,6 +27,20 @@ ekf_se_map: # Used only for broadcasting odom to base_link transforms
   odom0_nodelay: true
   odom0_differential: false
   odom0_relative: false
+
+#--------------------------------------
+#GPS odometry:
+
+#  odom1: /link_waypoint_nav/odometry/gps
+#  odom1_config: [true,  true,  false,
+#                 false, false, false,
+#                 false, false, false,
+#                 false, false, false,
+#                 false, false, false]
+#  odom1_queue_size: 5
+#  odom1_nodelay: false
+#  odom1_differential: false
+#  odom1_relative: false
 
 # -------------------------------------
 # Laser scanmatching odometry:
