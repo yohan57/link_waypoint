@@ -5,27 +5,26 @@
     <param name="port" type="string" value="/dev/ttyimu" />
     <param name="baudrate" type="int" value="115200" />    
     <!--remap from="imu/mag" to="imu/mag1"/-->
-    <remap from="imu" to="imu_e2box"/>
+    <remap from="imu" to="imu/data_raw"/>
   </node>
-
   <node pkg="nodelet" type="nodelet" name="imu_manager" args="manager"/>
 
   <!-- Transforms UM6 tilted data in imu_link frame to ENU data in base_link frame -->
 
-  <node pkg="nodelet" type="nodelet" name="imu_data_transformer" args="load imu_transformer/imu_transformer_nodelet imu_manager">
-    <remap from="imu_in/data" to="imu_e2box"/>
+  <!--node pkg="nodelet" type="nodelet" name="imu_data_transformer" args="load imu_transformer/imu_transformer_nodelet imu_manager"-->
+    <!--remap from="imu_in/data" to="imu_e2box"/-->
     <!--remap from="imu_in/mag" to="imu/mag1"/-->
-    <remap from="imu_out/data" to="imu/data_raw"/>
+    <!--remap from="imu_out/data" to="imu/data_raw"/-->
     <!--remap from="imu_out/mag" to="imu/mag"/-->
-    <param name="target_frame" value="base_link"/>
-  </node>
+    <!--param name="target_frame" value="base_link"/-->
+  <!--/node-->
 
   <!-- Filter raw gyro, accel and mag data into a usable orientation -->
 
   <node pkg="nodelet" type="nodelet" name="imu_filter" args="load imu_filter_madgwick/ImuFilterNodelet imu_manager">
     <rosparam>
-      orientation_stddev: 0.001
-      gain: 0.01
+      orientation_stddev: 0.1
+      gain: 0.001
       zeta: 0.001
       publish_tf: true
     </rosparam>
@@ -33,8 +32,10 @@
     <param name="use_mag" value="false"/>
   </node>
 
+<node pkg="tf" type="static_transform_publisher" name="imu_broadcaster" args="0 0 0 0 0 0 imu_link base_link 10000"/>
+
   <!--node pkg="tf" type="static_transform_publisher" name="imu_broadcaster" args="0 0.17 0.07 3.14159 0 0 base_link imu_link 100"/--> 
 
-  <node pkg="tf" type="static_transform_publisher" name="imu_broadcaster" args="0 0 0 0 0 0 base_link imu_link 10000"/>
+  <!--node pkg="tf" type="static_transform_publisher" name="imu_broadcaster" args="0 0 0 0 0 0 base_link imu_link 10000"/-->
 
 </launch>

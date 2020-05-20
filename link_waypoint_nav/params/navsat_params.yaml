@@ -1,5 +1,5 @@
 navsat_transform:
-  frequency: 2
+  frequency: 10
   delay: 0
   magnetic_declination_radians: 0.00000
   yaw_offset: 0.00000
