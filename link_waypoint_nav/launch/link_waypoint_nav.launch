@@ -28,7 +28,7 @@
 
  <!---Launch Localization(ekf, navsat tf) -->
     
-    <include file="$(find link_waypoint_nav)/launch/include/localization_m.launch" /> 
+    <include file="$(find link_waypoint_nav)/launch/include/localization.launch" /> 
 
  <!-- Run gmapping to create map -->
     <include file="$(find link_navigation)/launch/gmapping.launch" />
