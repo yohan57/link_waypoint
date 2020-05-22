@@ -8,5 +8,8 @@ Since we're using arduino board as a motor control board, arduino control code i
 ## Local Planner
 changed base_local_planner to teb_local_planner (for car like robot).
 
+## OSM
+Added osm-cartography pkg to visualize map
+
 ## Issues
 Still needs some tuning with parameters.
