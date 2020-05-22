@@ -14,7 +14,7 @@
         <remap from="/gps/fix" to="/navsat/fix" />
     </node>
 
-    <!--node pkg="tf" type="static_transform_publisher" name="gps_broadcaster" args="0 0 0 0 0 0 1 base_link gps"/-->
+    <node pkg="tf" type="static_transform_publisher" name="gps_broadcaster" args="0 0 0 0 0 0 1 base_link navsat"/>
 
   </group> 
 

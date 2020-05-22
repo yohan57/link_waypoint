@@ -13,7 +13,7 @@
     </node>
 
  <!-- Launch wheel encoder -->   
-    <include file="$(find link_waypoint_nav)/launch/include/wheel_encoder.launch"/>
+    <!--include file="$(find link_waypoint_nav)/launch/include/wheel_encoder.launch"/-->
 
 
  <!-- Launch e2box IMU -->   
