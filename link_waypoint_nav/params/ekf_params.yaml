@@ -133,7 +133,7 @@ ekf_se_map:
 
 
 # -------------------------------------
- GPS odometry:
+# GPS odometry:
 
   odom1: /link_waypoint_nav/odometry/gps
   odom1_config: [true,  true,  false,
