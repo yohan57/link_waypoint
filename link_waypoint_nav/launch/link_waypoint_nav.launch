@@ -35,6 +35,9 @@
  
  <!-- Launch move_base -->  
     <include file="$(find link_navigation)/launch/move_base_nav_m.launch" />
+ 
+ <!-- Launch osm -->  
+    <include file="$(find osm_cartography)/launch/geo_planner.launch" />
 
  <!-- Launch send_goal -->
     <include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" />

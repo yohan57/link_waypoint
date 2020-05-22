@@ -134,7 +134,7 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
     
   
   //pwm debugging code
-  pwm_log(int(lPwm), int(rPwm), l, r, x, z);
+  // pwm_log(int(lPwm), int(rPwm), l, r, x, z);
        
 }
 

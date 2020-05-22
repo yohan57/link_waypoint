@@ -9,7 +9,7 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
   print_diagnostics: true
   debug: false
 
-  map_frame: map
+  map_frame: local_map
   odom_frame: odom
   base_link_frame: base_link
   world_frame: odom
@@ -108,10 +108,10 @@ ekf_se_map:
   print_diagnostics: true
   debug: false
 
-  map_frame: map
+  map_frame: local_map
   odom_frame: odom
   base_link_frame: base_link
-  world_frame: map
+  world_frame: local_map
   initial_state: [0.0,  0.0,  0.0,
                   0.0,  0.0,  0.0,
                   0.0,  0.0,  0.0,
@@ -208,4 +208,5 @@ ekf_se_map:
                                 0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     1e-9,  0,    0,
                                 0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    1e-9,  0,
                                 0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1e-9]
+
 

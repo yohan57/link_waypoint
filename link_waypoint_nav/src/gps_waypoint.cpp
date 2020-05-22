@@ -114,7 +114,7 @@ geometry_msgs::PointStamped UTMtoMapPoint(geometry_msgs::PointStamped UTM_input)
         catch (tf::TransformException& ex)
         {
             ROS_WARN("%s", ex.what());
-            ros::Duration(0.01).sleep();
+            ros::Duration(0.1).sleep();
             //return;
         }
     }
@@ -176,7 +176,7 @@ int main(int argc, char** argv)
     ros::Publisher pubWaypointNodeEnded = n.advertise<std_msgs::Bool>("/link_waypoint_nav/waypoint_following_status", 100);
 
     //wait for the action server to come up
-    while(!ac.waitForServer(ros::Duration(10.0)))
+    while(!ac.waitForServer(ros::Duration(100.0)))
     {
         wait_count++;
         if(wait_count > 3)
