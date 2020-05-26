@@ -35,6 +35,20 @@ ekf_se_odom: # Used only for broadcasting odom to base_link transforms
   odom0_relative: false
 
 # -------------------------------------
+# rgbd odometry:
+
+  odom1: /rgbd/odom
+  odom1_config: [true, true, false,
+                 false, false, false,
+                 true,  true,  false,
+                 false, false, false,
+                 false, false, false]
+  odom1_queue_size: 10
+  odom1_nodelay: true
+  odom1_differential: false
+  odom1_relative: false
+
+# -------------------------------------
 # Laser scanmatching odometry:
 
 #  odom0: scanmatch_odom
@@ -131,20 +145,32 @@ ekf_se_map:
   odom0_differential: false
   odom0_relative: false
 
+# rgbd odometry:
 
-# -------------------------------------
-# GPS odometry:
-
-  odom1: /link_waypoint_nav/odometry/gps
-  odom1_config: [true,  true,  false,
+  odom1: /rgbd/odom
+  odom1_config: [true, true, false,
                  false, false, false,
-                 false, false, false,
+                 true,  true,  false,
                  false, false, false,
                  false, false, false]
   odom1_queue_size: 10
   odom1_nodelay: true
   odom1_differential: false
   odom1_relative: false
+
+# -------------------------------------
+# GPS odometry:
+
+  odom2: /link_waypoint_nav/odometry/gps
+  odom2_config: [true,  true,  false,
+                 false, false, false,
+                 false, false, false,
+                 false, false, false,
+                 false, false, false]
+  odom2_queue_size: 10
+  odom2_nodelay: true
+  odom2_differential: false
+  odom2_relative: false
 
 # -------------------------------------
 # Laser scanmatching odometry:

@@ -22,23 +22,23 @@
  <!-- Launch GPS -->
     <include file="$(find link_waypoint_nav)/launch/include/gps.launch" />
 
- <!-- laser scan -->
+ <!--Launch realsense modules including laser scan conversion and rgbd odometry -->
 
-    <include file="$(find link_waypoint_nav)/launch/include/realsense2laser.launch" /> 
+    <include file="$(find link_waypoint_nav)/launch/include/realsense_modules.launch" /> 
 
  <!---Launch Localization(ekf, navsat tf) -->
     
-    <include file="$(find link_waypoint_nav)/launch/include/localization.launch" /> 
+    <include file="$(find link_waypoint_nav)/launch/include/localization_m.launch" /> 
 
  <!-- Run gmapping to create map -->
     <include file="$(find link_navigation)/launch/gmapping.launch" />
  
  <!-- Launch move_base -->  
     <include file="$(find link_navigation)/launch/move_base_nav_m.launch" />
- 
+
  <!-- Launch osm -->  
-    <include file="$(find osm_cartography)/launch/geo_planner.launch" />
+    <!--include file="$(find osm_cartography)/launch/geo_planner.launch" /-->
 
  <!-- Launch send_goal -->
-    <include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" />
+    <!--include file="$(find link_waypoint_nav)/launch/include/send_goals.launch" /-->
 </launch> 

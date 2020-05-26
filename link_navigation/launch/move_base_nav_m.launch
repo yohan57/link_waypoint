@@ -9,6 +9,7 @@
     <rosparam file="$(find link_navigation)/params/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find link_navigation)/params/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find link_navigation)/params/teb_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find link_navigation)/params/global_planner_params.yaml" command="load" />
     <rosparam file="$(find link_navigation)/params/costmap_conversion_params.yaml" command="load" />
 
     <rosparam file="$(find link_navigation)/params/move_base_params_m.yaml" command="load" />

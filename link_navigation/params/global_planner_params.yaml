@@ -1,0 +1,4 @@
+#
+NavfnROS:
+  neutral_cost: 50
+  cost_factor: 0.1

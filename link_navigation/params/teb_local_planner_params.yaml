@@ -10,14 +10,15 @@ TebLocalPlannerROS:
 
   min_samples: 3
 
-  global_plan_overwrite_orientation: True
-  max_global_plan_lookahead_dist: 2.0
+  global_plan_overwrite_orientation: False
+  max_global_plan_lookahead_dist: 3.0
   feasibility_check_no_poses: 5
-  
+  allow_init_with_backwards_motion: True  
   # Robot  
 
   max_vel_x: 0.5
   min_vel_x: 0.3
+  max_vel_x_backwards: 0.2
 
 
 
@@ -53,7 +54,7 @@ TebLocalPlannerROS:
 
   # Obstacles
     
-  min_obstacle_dist: 0.5
+  min_obstacle_dist: 0.2
   include_costmap_obstacles: True
   costmap_obstacles_behind_robot_dist: 0.2
   obstacle_poses_affected: 20
@@ -70,7 +71,7 @@ TebLocalPlannerROS:
   weight_acc_lim_x: 0
   weight_acc_lim_theta: 1
   weight_kinematics_nh: 1000
-  weight_kinematics_forward_drive: 3
+  weight_kinematics_forward_drive: 0.01
   weight_kinematics_turning_radius: 1
   weight_optimaltime: 1
   weight_obstacle: 50

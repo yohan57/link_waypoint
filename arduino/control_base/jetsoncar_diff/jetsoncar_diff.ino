@@ -17,8 +17,7 @@
 
 #include <stdlib.h>
 //#include <stdbool.h>
-
-#include <Servo.h>
+#include <math.h>
 
 #define USB_USBCON
 #include <ros.h>
@@ -54,8 +53,8 @@ int usonic_1 = 1;
 geometry_msgs::Twist zeroTwist;
 
 //pwm constant initiate
-const int MIN_PWM = 30;
-const int MAX_PWM = 100;
+const int MIN_PWM = 37;
+const int MAX_PWM = 125;
 
 int ustop(int us_0, int us_1){
   int us_stop = (us_0 || us_1);
@@ -80,20 +79,25 @@ void pwm_log(int l, int r, float fl, float fr, float x, float z){
   char tmp1[20], tmp2[20], tmp3[20], tmp4[20];
   dtostrf(fl, 8, 3, tmp1);
   dtostrf(fr, 8, 3, tmp2);
-  dtostrf(x, 8, 3, tmp3);
-  dtostrf(z, 8, 3, tmp4);
-  sprintf(str1, "PWM: %d %d    lr: %s %s\n", l, r, tmp1, tmp2);
+  dtostrf(x, 8, 4, tmp3);
+  dtostrf(z, 8, 4, tmp4);
+  //sprintf(str1, "PWM: %d %d    lr: %s %s\n", l, r, tmp1, tmp2);
   sprintf(str2, "twist(x, z): %s %s\n", tmp3, tmp4);
-  nh.loginfo(str1);
+  //nh.loginfo(str1);
   nh.loginfo(str2);
 }
 
 void driveCallback(const geometry_msgs::Twist &twistMsg)
 {
   // Cap values at [-1 .. 1]
+  
   float x = max(min(twistMsg.linear.x, 1.0f), -1.0f);
   float z = max(min(twistMsg.angular.z, 1.0f), -1.0f);
-
+  
+  
+  x = ceil(10000*x)/10000;
+  z = ceil(10000*z)/10000;
+  
   // Calculate the intensity of left and right wheels. Simple version.
   /*
   float l = (twistMsg.linear.x - twistMsg.angular.z) / 2;
@@ -111,11 +115,21 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
   if (l==0 && r==0){
     defaultDrive();
   }
-  else if ((l<0 || r<0) && x<0){
+  else if ((l<0 && r<0) && x<0){
     digitalWrite(DIRA_f, l<0);
     digitalWrite(DIRA_b, l<0);
     digitalWrite(DIRB_f, r>0);
     digitalWrite(DIRB_b, r>0);
+    analogWrite(PWMA_f, rPwm);
+    analogWrite(PWMA_b, rPwm);
+    analogWrite(PWMB_f, lPwm);
+    analogWrite(PWMB_b, lPwm); 
+    }
+   else if (!(l*r>0) && x<0){
+    digitalWrite(DIRA_f, l>0);
+    digitalWrite(DIRA_b, l>0);
+    digitalWrite(DIRB_f, r<0);
+    digitalWrite(DIRB_b, r<0);
     analogWrite(PWMA_f, rPwm);
     analogWrite(PWMA_b, rPwm);
     analogWrite(PWMB_f, lPwm);
@@ -134,7 +148,7 @@ void driveCallback(const geometry_msgs::Twist &twistMsg)
     
   
   //pwm debugging code
-  // pwm_log(int(lPwm), int(rPwm), l, r, x, z);
+  //pwm_log(int(lPwm), int(rPwm), l, r, x, z);
        
 }
 
