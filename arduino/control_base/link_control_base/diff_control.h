@@ -1,32 +1,9 @@
-/*
-  Arduino ROS node for JetsonCar project
-  The Arduino controls a TRAXXAS Rally Car
-  MIT License
-  JetsonHacks (2016)
-  differential drive robot code based on https://github.com/Reinbert/ros_diffdrive_robot/blob/master/ros_diffdrive_robot.ino
-  wheel intensity calculation
-  taken from https://hackernoon.com/unicycle-to-differential-drive-courseras-control-of-mobile-robots-with-ros-and-rosbots-part-2-6d27d15f2010#1e59
-*/
-
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include <WProgram.h>
-#endif
-
-#include <stdlib.h>
-//#include <stdbool.h>
-#include <math.h>
-
-#define USB_USBCON
 #include <ros.h>
-
+#include <math.h>
 #include <std_msgs/UInt16.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Twist.h>
-
-ros::NodeHandle  nh;
 
 //pin for DC motor
 //DIR = Direction
@@ -50,6 +27,8 @@ int usonic_0 = 1;
 int usonic_1 = 1;
 
 geometry_msgs::Twist zeroTwist;
+void driveCallback(const geometry_msgs::Twist &twistMsg);
+void defaultDrive();
 
 //pwm constant initiate
 const int MIN_PWM = 37;
@@ -71,19 +50,6 @@ int ustop(int us_0, int us_1){
 float Pmap(float x, float out_min, float out_max)
 {
   return x * (out_max - out_min) + out_min;
-}
-
-void pwm_log(int l, int r, float fl, float fr, float x, float z){
-  char str1[50], str2[50];
-  char tmp1[20], tmp2[20], tmp3[20], tmp4[20];
-  dtostrf(fl, 8, 3, tmp1);
-  dtostrf(fr, 8, 3, tmp2);
-  dtostrf(x, 8, 4, tmp3);
-  dtostrf(z, 8, 4, tmp4);
-  //sprintf(str1, "PWM: %d %d    lr: %s %s\n", l, r, tmp1, tmp2);
-  sprintf(str2, "twist(x, z): %s %s\n", tmp3, tmp4);
-  //nh.loginfo(str1);
-  nh.loginfo(str2);
 }
 
 void driveCallback(const geometry_msgs::Twist &twistMsg)
@@ -213,30 +179,3 @@ void stopCallback_1 (const std_msgs:: Int32 _usonic_signal){
   }
   
  }
-
-ros::Subscriber<geometry_msgs::Twist> driveSubscriber("/cmd_vel", &driveCallback) ;
-ros::Subscriber<std_msgs:: Int32> usonicSubscriber_0("usonic_data_0", &stopCallback_0);
-ros::Subscriber<std_msgs:: Int32> usonicSubscriber_1("usonic_data_1", &stopCallback_1);
-//ros::Subscriber<std_msgs:: Int32> usonicSubscriber_2("usonic_data_2", &stopCallback_1);
-// ros::Subscirber<std_msgs:: String> usonicSubscriber_3("usonic_data_3", &stopCallback);
-
-void setup() {
-  //drive setup
-  pinMode(13, OUTPUT);
-  Serial.begin(57600) ;
-  nh.initNode();
-  // Subscribe to the throttle messages
-  nh.subscribe(driveSubscriber);
-  nh.subscribe(usonicSubscriber_0);
-  nh.subscribe(usonicSubscriber_1);
-  defaultDrive();
-  //wheel encoder setup
-  
-  delay(100) ;
-
-}
-
-void loop() {
-  nh.spinOnce();
-  delay(1);
-}
