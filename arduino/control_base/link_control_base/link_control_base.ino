@@ -52,8 +52,8 @@ void encoder_pub() {
 
   rot_tot_x = rot[0] + cnt[0]/50;
   rot_tot_y = rot[1] + cnt[1]/50;
-  vector3.x = rot_tot_x;
-  vector3.y = rot_tot_y;
+  vector3.x = rot_tot_x/19;
+  vector3.y = rot_tot_y/19;
   pub.publish(&vector3);
   //Serial.print(cnt[0]);
   //Serial.print(',');
